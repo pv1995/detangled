@@ -20,6 +20,10 @@ export function selectEvent({commit},payload){
     commit ('setSelectedEvent', payload)
 }
 
+export function selectCurrentselectedMonthAndYear({commit}, payload){
+    commit('setCurrentselectedMonthAndYear', payload)
+}
+
 export function editEvent({dispatch}, payload) {
     return new Promise((resolve, _reject) =>{
         return taskHTTP({

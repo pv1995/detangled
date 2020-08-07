@@ -31,8 +31,13 @@ export default {
   },
  computed:{
    events(){
-     return this.$store.getters['events/events']
-   }
+     return this.$store.getters['events/sortedEvents']
+    //  console.log("SORTING EVENTS")
+   },
+  //  SortEvents(){
+     
+  //       console.log(this.events.start, "START DATES")
+  //  }
  }
   
 }

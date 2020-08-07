@@ -1,6 +1,7 @@
 export default function () {
   return {
     events:[],
-    selectedEvent:{}
+    selectedEvent:{},
+    currentselectedMonthAndYear:"2019/09"
   }
 }

@@ -12,8 +12,8 @@
         v-model='selectedDate'
         :events = "getDates"
         event-color="orange"
-        default-year-month="2019/09"
-      
+        :default-year-month="defaultMonthYear"
+        :key="key"
     ></q-date>
     <div class='text-h5 text-primary'>
       Click on a trip to view duration and stay of a particular trip.
@@ -45,9 +45,7 @@
 
 <script>
 import { date } from 'quasar';
-const { addToDate } = date;
-
-
+const { addToDate, formatDate } = date;
 export default {
   name: 'calender',
 
@@ -56,13 +54,9 @@ export default {
           selectedDate:'',
           title:'',
           key:0
-
       }
   },
    methods: {
-     goToday() {
-      this.$refs.calendar.goToday()
-    },
     deselectEvent() {
       this.$store.dispatch('events/selectEvent', {})
     }
@@ -70,13 +64,16 @@ export default {
 
   computed:{
       getDates(){
-        return this.$store.getters['events/events'].map(e=>{
-            return date.formatDate(e.start, "YYYY/MM/DD");
-        })
+        return this.$store.getters['events/sortedEvents'].map(e=>formatDate(e.start, "YYYY/MM/DD"));
       },
 
       selectedEvent(){
         return this.$store.getters['events/selectedEvent'];
+      },
+
+      defaultMonthYear(){
+        this.key++;
+        return this.$store.getters['events/selectedMonthAndYear'];
       },
 
       getSelectedDates() {
@@ -88,15 +85,15 @@ export default {
       },
 
       newDates() {
-        return this.getSelectedDates.map(e=>{
-            return date.formatDate(e, "YYYY/MM/DD");
-        })
+        return this.getSelectedDates.map(e=>formatDate(e, "YYYY/MM/DD"));
       },
 
       getStartDateForSelectedEvent(){
-        this.key ++;
-        return date.formatDate(this.$store.getters['events/selectedEvent'].start, 'YYYY/MM')
-      }
+        this.key++;
+        return formatDate(this.$store.getters['events/selectedEvent'].start, 'YYYY/MM')
+      },
+
+      
   }
 }
 </script>

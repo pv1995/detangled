@@ -2,27 +2,27 @@
     <q-card class="my-card" flat bordered @click.stop='selectEvent'>
       <q-card-section horizontal>
         <q-card-section class="q-pt-xs">
-          <div class="text-h6 q-mt-sm q-mb-xs text-primary" v-if='!editInit'>
+          <!-- <div class="text-h6 q-mt-sm q-mb-xs text-primary" v-if='!editInit'>
             {{data.destination}}
-          </div>
-          <div v-else>
-          <q-input color="primary" v-model="destination" label="Destination">
+          </div> -->
+          <!-- <div v-else> -->
+          <q-input color="primary" v-model="destination" label="Destination" @click='editTrip(data.id)'>
             <template v-slot:prepend>
               <q-icon name="subway" color='primary'/>
             </template>
           </q-input>
-          </div>
+          <!-- </div> -->
           <div class="line-height-80">
-          <div class="text-caption text-grey" v-if='!editInit'>
+          <!-- <div class="text-caption text-grey" v-if='!editInit'>
             Comment:  {{data.comment}}
-          </div>
-          <div v-else>
-          <q-input dense color="primary" v-model="comment" label="Comment">
+          </div> -->
+          <!-- <div v-else> -->
+          <q-input dense color="primary" v-model="comment" label="Comment" @click='editTrip(data.id)'>
             <template v-slot:prepend>
               <q-icon name="speaker_notes" color='primary'/>
             </template>
           </q-input>
-          </div>
+          <!-- </div> -->
           <div class="text-caption text-grey">
             Start Date:  {{dateToShow}}
           </div>
@@ -36,10 +36,10 @@
       <q-separator />
 
       <q-card-actions>
-      <q-btn flat color="secondary" @click.stop='editTrip(data.id)' v-if='!editInit' >
+      <!-- <q-btn flat color="secondary" @click.stop='editTrip(data.id)' v-if='!editInit' >
           Edit
-        </q-btn>
-        <q-btn flat color="primary" @click.stop='editTrip' v-else  @click='save(data.id)'>
+        </q-btn> -->
+        <q-btn flat color="primary"  v-if='editInit'  @click='save(data.id)'>
           Save
         </q-btn>
         <q-btn flat color="negative" @click.stop='deleteTrip(data.id)'>
